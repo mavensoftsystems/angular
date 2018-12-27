@@ -1,0 +1,15 @@
+<div class="container">
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+  <span>
+    Flight Search Engine
+  </span>
+  <span class="fill-remaining-space"></span>
+  <!-- <button mat-button>Profile</button> -->
+  <button mat-button (click)="journeyHistory()" *ngIf="isLoggedIn">Journey History</button>
+  <!--button mat-button routerLink="login" *ngIf="!isLoggedIn; else notLoggedIn">Login</button>
+  <ng-template #notLoggedIn>
+    <button mat-button (click)="onLogout()">Logout</button>
+  </ng-template -->
+  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+</mat-toolbar>
+</div>

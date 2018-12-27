@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Angular App</title>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link href="../node_modules/ng2-toastr/ng2-toastr.css" rel="stylesheet" />
+  <script src="../node_modules/ng2-toastr/ng2-toastr.js"></script> -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #f1cdb861;
+      /* change if the mask should have another color then white */
+      z-index: 99;
+      /* makes sure it stays on top */
+    }
+
+    #status {
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      left: 50%;
+      /* centers the loading animation horizontally one the screen */
+      top: 50%;
+      /* centers the loading animation vertically one the screen */
+      background-image: url("../../assets/images/loader-flight.gif");
+      /* path to your loading animation */
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: -100px 0 0 -100px;
+      /* is width and height divided by two */
+    }
+  </style>
+<link rel="stylesheet" href="styles.8ce03da34ccf3e801e38.css"></head>
+
+<body>
+  <my-app>
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+  </my-app>
+  <script>
+    $(window).on('load', function () { // makes sure the whole site is loaded 
+      $('#status').fadeOut(); // will first fade out the loading animation 
+      $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+      $('body').delay(350).css({ 'overflow': 'visible' });
+    })
+  </script>
+<script type="text/javascript" src="runtime.ec2944dd8b20ec099bf3.js"></script><script type="text/javascript" src="polyfills.20ab2d163684112c2aba.js"></script><script type="text/javascript" src="main.02a637f6462e81812d1e.js"></script></body>
+
+</html>

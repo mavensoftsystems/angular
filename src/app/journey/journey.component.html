@@ -1,0 +1,27 @@
+<div class="">
+<div class="search-content container">
+  <div *ngFor="let item of journeyHistory" >
+  <mat-card class="journey-box">
+          <mat-card-title>{{item.origin}} to {{item.destination}}</mat-card-title>
+      <mat-card-subtitle><h4>INR {{item.fare}}</h4></mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        Name : <span>&emsp; {{item.name}} {{item.lastName}} </span>
+      </div>
+      <div>
+        Gender: <span>&emsp; {{item.gender}}</span>
+      </div>
+      <div>
+          Number: <span>&emsp; {{item.number}}</span>
+        </div>
+        <div>
+            Email: <span>&emsp; {{item.email}}</span>
+          </div>
+          <div>
+            Date: <span>&emsp; {{item.date | date}}</span>
+          </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+</div>

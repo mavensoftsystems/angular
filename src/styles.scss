@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+/* Add application styles & imports to this file! */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 30px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+	stroke: #ff4081!important;
+}
+
+$color-h1:red;
+h1 {
+    color: $color-h1;
+}
+.mat-fab.mat-accent, .mat-flat-button.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+  background-color: #3f51b5;
+}
+.mat-toolbar.mat-primary {
+  background:  #f37238;
+}

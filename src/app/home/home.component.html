@@ -1,0 +1,162 @@
+<div class="container">
+<div class="search-content">
+       <mat-card class="search-form">
+        <mat-card-title></mat-card-title>
+        <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+                  <div class="col-md-3">
+                <mat-form-field>
+                    <input matInput name="origin" placeholder="Origin" [(ngModel)]="model.origin" (input)="onOriginChange($event.target.value)"
+                        required>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input matInput name="destination" #actDest placeholder="Destination" [(ngModel)]="model.destination"
+                        (input)="onDestinationChange($event.target.value)" required>
+                </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                <span *ngIf="showDepart">
+                    <mat-form-field>
+                        <input matInput name="departureDate" [(ngModel)]="model.departureDate" [matDatepicker]="departPicker"
+                            (ngModelChange)="updateCalcs($event)" placeholder="Depart:" required>
+                        <mat-datepicker-toggle matSuffix [for]="departPicker"></mat-datepicker-toggle>
+                        <mat-datepicker [startAt]="model.departureDate" #departPicker opened="true"></mat-datepicker>
+
+                    </mat-form-field>
+                </span>
+                <span *ngIf="!showDepart">
+                        <mat-form-field>
+                            <input matInput name="departureDate" [(ngModel)]="model.departureDate" [matDatepicker]="departPicker"
+                                (ngModelChange)="updateCalcs($event)" placeholder="Depart:" required>
+                            <mat-datepicker-toggle matSuffix [for]="departPicker"></mat-datepicker-toggle>
+                            <mat-datepicker [startAt]="model.departureDate" #departPicker></mat-datepicker>
+    
+                        </mat-form-field>
+    
+                    </span>
+            </div>
+            <div class="col-md-2">
+
+                <span *ngIf="showReturn">
+                    <mat-form-field>
+                        <input matInput name="arrivalDate" [(ngModel)]="model.arrivalDate" [matDatepicker]="returnPicker"
+                            placeholder="Return:" required>
+                        <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+                        <mat-datepicker [startAt]="model.arrivalDate" opened="true" #returnPicker></mat-datepicker>
+                    </mat-form-field>
+                </span>
+                <span *ngIf="!showReturn">
+                    <mat-form-field>
+                        <input matInput name="arrivalDate" [(ngModel)]="model.arrivalDate" [matDatepicker]="returnPicker"
+                            placeholder="Return:" required>
+                        <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+                        <mat-datepicker [startAt]="model.arrivalDate" #returnPicker></mat-datepicker>
+                    </mat-form-field>
+                </span>
+               </div>
+
+
+               <div class="col-md-2">
+            <mat-card-actions align="end">
+                <button mat-raised-button color="accent" [disabled]="!searchForm.form.valid">Search</button>
+            </mat-card-actions>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+
+    </mat-card>
+    
+    <mat-card class="result">
+        <mat-card-title>Filter Amout - {{selectedValue | currency:"INR"}}</mat-card-title>
+        <mat-card-actions>
+            <mat-slider class="example-margin" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min" [step]="step"
+                [thumbLabel]="thumbLabel" [tickInterval]="5" [(ngModel)]="selectedValue" [vertical]="vertical" (change)="onChangeRange($event)">
+            </mat-slider>
+        </mat-card-actions>
+    </mat-card>
+   
+    <div class="search-content">
+    <div>
+        <div class="center-loader" *ngIf="loader" style="width:50px;margin:auto;margin-top:30px;">
+            <!-- <strong>Loading
+                <span class="loader__dot">.</span>
+                <span class="loader__dot">.</span>
+                <span class="loader__dot">.</span></strong> -->
+                <mat-spinner></mat-spinner>
+        </div>
+
+        <div>
+            <div *ngIf="results">
+                <div *ngFor="let item of results.onwardflights">
+                        <div class="col-md-3">
+                                
+                    <mat-card *ngIf="item.fare.totalfare < this.selectedValue || this.selectedValue == '0'" class="item-list">
+                 
+                        <div class="details-content">
+                            <mat-card-title>{{item.origin}} to {{item.destination}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title>{{item.fare.totalfare | currency:"INR"}}</mat-card-title>
+                        </div>
+                        <img mat-card-image src="{{fullImagePath}}" alt="Flight Image" width="300" class="Flight-img">
+
+                        <div class="details-content">
+                            <mat-card-title><span>Depart:</span>{{item.DepartureTime}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title><span>Arrive:</span>{{item.ArrivalTime}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title><span>Date: </span>{{item.arrdate | date}}</mat-card-title>
+                        </div>
+
+                        <mat-card-actions align="end">
+
+                            <button mat-line mat-raised-button color="accent" (click)="flightBook({origin:item.origin,destination:item.destination,date:item.arrdate,fare:item.fare.totalfare})">Book
+                                This Flight</button>
+
+                        </mat-card-actions>
+                 
+                    </mat-card>
+                    
+                </div>
+                  
+                </div>
+            <mat-card>
+                <div *ngFor="let data of results.returnflights">
+                        <div class="col-md-3">
+                            
+                    <mat-card *ngIf="data.fare.totalfare < this.selectedValue || this.selectedValue == '0'" class="item-list">
+                        <div class="details-content">
+                            <mat-card-title>{{data.origin}} to {{data.destination}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title>{{data.fare.totalfare | currency:"INR"}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title><span>Depart:</span>{{data.DepartureTime}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title><span>Arrive:</span>{{data.ArrivalTime}}</mat-card-title>
+                        </div>
+                        <div class="details-content">
+                            <mat-card-title><span>Date: </span>{{data.arrdate | date}}</mat-card-title>
+                        </div>
+                        <img mat-card-image src="{{fullImagePath}}" alt="Flight Image" width="300" class="Flight-img">
+
+                        <mat-card-actions align="end">
+                            <button mat-line mat-raised-button color="accent" (click)="flightBook({origin:data.origin,destination:data.destination,date:data.arrdate,fare:data.fare.totalfare})">Book
+                                This Flight</button>
+
+                        </mat-card-actions>
+                    </mat-card>
+                  </div>
+                  
+                </div>
+            <div class="clearfix"></div>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+    </div>

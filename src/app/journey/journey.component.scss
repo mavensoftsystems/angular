@@ -1,0 +1,54 @@
+.example-card {
+    max-width: 400px;
+  }
+
+  mat-grid-tile {
+    background: lightblue;
+  }
+
+  mat-card {
+    max-width: 33%;
+    margin: 5px 0 0 15px;
+    text-align: center;
+    float: left;
+  }
+  .signin-content {
+    padding: 60px 1rem;
+  }
+  .full-width-input {
+    width: 100%;
+  }
+
+  @media screen and (max-width:992px){
+    mat-card {
+      max-width: 85%;
+    float: inherit;
+    margin: 0 0px 25px 0;
+    }
+  }
+  .journey-box {
+    margin: 10px 0px 0 0;
+    box-shadow: 1px 1px 1px 1px #d4bfb5;
+    background: #fff4ef;
+    text-align: center;
+    line-height: 28px;
+    width: 100% !important;
+}
+.journey-box .mat-card-actions, .mat-card-content, .mat-card-subtitle{ margin: 0px;}
+.journey-box span{color: #f37238;}
+.journey-box h4{color: #f37238; font-weight: bold;}
+mat-card[_ngcontent-c3] {
+  max-width: 32% !important;
+  margin: 12px 0 0 10px;
+  text-align: center;
+  float: left;
+}
+
+@media screen and (max-width:992px){ 
+  mat-card[_ngcontent-c3] {
+    max-width: 350px !important;
+    margin: 5px 0 0 15px;
+    text-align: center;
+    float: left;
+  }
+}

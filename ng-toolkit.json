@@ -1,0 +1,7 @@
+{
+  "universal": {
+    "project": "FSE",
+    "skipInstall": false,
+    "directory": "."
+  }
+}
