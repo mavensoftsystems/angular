@@ -49,11 +49,12 @@ STEP 2 :
        ng serve --open
 
 STEP 3 :
-
-       Go to server folder ==> cd server
+ =======
+    
+       Open another terminal and go to server folder ==> cd server
 
 STEP 4: 
-
+ ======
       node server.js
 
 
